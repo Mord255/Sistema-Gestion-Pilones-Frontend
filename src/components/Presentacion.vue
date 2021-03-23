@@ -59,7 +59,7 @@ export default {
     methods:{
         ...mapMutations(['asignarIdPresentacion','asignarIdUsuario']),
         async ObtenerData(){
-            const respuesta = await axios.get(API_URL+'/mostrarUsuarios?id_pilon='+this.idPresentacion)
+            const respuesta = await axios.get(this.API_URL+'/mostrarUsuarios?id_pilon='+this.idPresentacion)
             this.personas = respuesta.data
             // console.log(this.personas)
             return this.personas
@@ -72,7 +72,7 @@ export default {
             }else{
                 let config = {headers : {"Content-type" : "application/x-www-form-urlencoded"}}
                 let data = 'id_usuarios='+id_usuarios+'&id_pilon='+id_pilon;
-                this.axios.post(API_URL+'/eliminarUsuario',data,config).then((response) => {
+                this.axios.post(this.API_URL+'/eliminarUsuario',data,config).then((response) => {
                     if(response.status=200){
                         this.text = 'Usuario Eliminado Exitosamente'
                         this.snackbar = true 

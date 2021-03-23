@@ -76,8 +76,8 @@ export default {
                 this.snackbar = true ;
                 this.text = 'Completa Correctamente Todos los Campos'
             }else{
-                this.url = API_URL+'/loginAdmin?user='+this.user+'&password='+this.password
-                this.url2 = API_URL+'/loginUsuarios?user='+this.user+'&password='+this.password
+                this.url = this.API_URL+'/loginAdmin?user='+this.user+'&password='+this.password
+                this.url2 = this.API_URL+'/loginUsuarios?user='+this.user+'&password='+this.password
                 const respuesta = await axios.get(this.url)
                 const respuesta2 = await axios.get(this.url2)
                 this.usuario = respuesta.data
