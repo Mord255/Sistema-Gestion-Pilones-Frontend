@@ -59,7 +59,7 @@ import {mapState,mapMutations} from 'vuex' ;
 export default {
     name: 'EditarUsuario',
     computed:{
-        ...mapState(['idUsuario','mostrarBoton','nombreSesion']),
+        ...mapState(['idUsuario','mostrarBoton','nombreSesion','API_URL']),
     },
     data() {
         return {
@@ -87,7 +87,7 @@ export default {
     methods:{
         
         async ObtenerData(){
-            const respuesta = await axios.get('http://127.0.0.1:8000/api/mostrarCuenta?id_usuarios_cuentas='+this.idUsuario)
+            const respuesta = await axios.get(API_URL+'/mostrarCuenta?id_usuarios_cuentas='+this.idUsuario)
             this.datos = respuesta.data
 
             this.datos.forEach(element => {
@@ -103,7 +103,7 @@ export default {
             return this.datos
         },
         async ObtenerMeses(){
-            const respuesta1 = await axios.get('http://127.0.0.1:8000/api/mostrarMeses')
+            const respuesta1 = await axios.get(API_URL+'/mostrarMeses')
             this.data1 = respuesta1.data
             this.data1.forEach(element => {
                 this.meses.push(element['nombre_mes'])
@@ -113,7 +113,7 @@ export default {
         },
         async ObtenerAnos(){
             
-            const respuesta2 = await axios.get('http://127.0.0.1:8000/api/mostrarAnos')
+            const respuesta2 = await axios.get(API_URL+'/mostrarAnos')
             this.data2 = respuesta2.data
             this.data2.forEach(element => {
                 this.anos.push(element['descripcion_ano'])
@@ -123,7 +123,7 @@ export default {
         },
         async ObtenerPilones(){
             
-            const respuesta3 = await axios.get('http://127.0.0.1:8000/api/mostrarPilones')
+            const respuesta3 = await axios.get(API_URL+'/mostrarPilones')
             this.data3 = respuesta3.data
             this.data3.forEach(element => {
                 this.pilones.push(element['numero_pilon'])
@@ -170,7 +170,7 @@ export default {
             }else{
                 let config = {headers : {"Content-type" : "application/x-www-form-urlencoded"}}
                 let data = 'ano='+ id_ano+'&mes='+id_mes+'&pilon='+id_pilon+'&user='+id_user+'&estado='+data_estado;
-                this.axios.post('http://127.0.0.1:8000/api/NuevoRegistroCuentas',data,config).then((response) => {
+                this.axios.post(API_URL+'/NuevoRegistroCuentas',data,config).then((response) => {
                     if(response.status=200){
                         console.log(response.data)
                         // location.reload()

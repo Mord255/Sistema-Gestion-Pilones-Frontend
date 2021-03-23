@@ -48,7 +48,7 @@ import {mapState,mapMutations} from 'vuex' ;
 export default {
     name: 'Login',
     computed:{
-        ...mapState(['idUsuario','nombreSesion','mostrarBoton'])
+        ...mapState(['idUsuario','nombreSesion','mostrarBoton','API_URL'])
     },
     data() {
         return {
@@ -76,8 +76,8 @@ export default {
                 this.snackbar = true ;
                 this.text = 'Completa Correctamente Todos los Campos'
             }else{
-                this.url = 'http://127.0.0.1:8000/api/loginAdmin?user='+this.user+'&password='+this.password
-                this.url2 = 'http://127.0.0.1:8000/api/loginUsuarios?user='+this.user+'&password='+this.password
+                this.url = API_URL+'/loginAdmin?user='+this.user+'&password='+this.password
+                this.url2 = API_URL+'/loginUsuarios?user='+this.user+'&password='+this.password
                 const respuesta = await axios.get(this.url)
                 const respuesta2 = await axios.get(this.url2)
                 this.usuario = respuesta.data

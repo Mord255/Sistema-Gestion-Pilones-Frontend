@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 state: {
-    API_URL:'',
+    API_URL:'https://sistemagestionpilonesbackend.herokuapp.com/api',
     nombreSesion : '',
     idPresentacion : '',
     idUsuario : '',

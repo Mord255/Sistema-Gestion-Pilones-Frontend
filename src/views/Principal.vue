@@ -123,7 +123,7 @@ import {mapState,mapMutations} from 'vuex' ;
 export default {
     name: 'Principal',
     computed:{
-        ...mapState(['nombreSesion','mostrarBoton'])
+        ...mapState(['nombreSesion','mostrarBoton','API_URL'])
     },
     data() {
         return {
@@ -161,7 +161,7 @@ export default {
     methods: {
         ...mapMutations(['asignarIdPresentacion']),
         async ObtenerPilones(){
-            const respuesta = await axios.get('http://127.0.0.1:8000/api/mostrarPilones')
+            const respuesta = await axios.get(API_URL+'/mostrarPilones')
             this.pilones = respuesta.data
             // console.log(this.pilones)
             this.pilones.forEach(element => {
@@ -170,7 +170,7 @@ export default {
             return this.pilones
         },
         async ObtenerAdministradores(){
-            const respuesta2 = await axios.get('http://127.0.0.1:8000/api/mostrarAdmins')
+            const respuesta2 = await axios.get(API_URL+'/mostrarAdmins')
             this.admins = respuesta2.data
             // console.log(this.admins)
             this.admins.forEach(element => {
@@ -190,7 +190,7 @@ export default {
             }else{
                 let config = {headers : {"Content-type" : "application/x-www-form-urlencoded"}}
                 let data = 'ubicacion='+ this.ubicacionPilon+'&numero='+this.numeroPilon;
-                this.axios.post('http://127.0.0.1:8000/api/registroPilon',data,config).then((response) => {
+                this.axios.post(API_URL+'/registroPilon',data,config).then((response) => {
                     if(response.status=200){
                         this.snackbar = true ;
                         this.text = 'Pilon Registrado Exitosamente'
@@ -224,7 +224,7 @@ export default {
             }else{
                 let config = {headers : {"Content-type" : "application/x-www-form-urlencoded"}}
                 let data = 'titular='+ this.titular_usuario+'&dni='+this.dni_usuario+'&password='+this.password_usuario+'&sexo='+this.sexo_usuario+'&vivienda='+this.vivienda_usuario+'&id_pilon='+id_pilon;
-                this.axios.post('http://127.0.0.1:8000/api/registroUsuarios',data,config).then((response) => {
+                this.axios.post(API_URL+'/registroUsuarios',data,config).then((response) => {
                     if(response.status=200){
                         this.snackbar = true ;
                         this.text = 'Usuario Registrado Exitosamente'
@@ -244,7 +244,7 @@ export default {
             }else{
                 let config = {headers : {"Content-type" : "application/x-www-form-urlencoded"}}
                 let data = 'password='+ this.password_admin+'&dni='+this.dni_admin+'&nombres='+this.nombre_admin+'&apellidos='+this.apellido_admin+'&edad='+this.edad_admin+'&sexo='+this.sexo_admin+'&cargo='+this.cargo_admin+'&vivienda='+this.vivienda_admin;
-                this.axios.post('http://127.0.0.1:8000/api/registroAdmin',data,config).then((response) => {
+                this.axios.post(API_URL+'/registroAdmin',data,config).then((response) => {
                     if(response.status=200){
                         this.snackbar = true ;
                         this.text = 'Administrador Registrado Exitosamente'
@@ -271,7 +271,7 @@ export default {
                 });
                 let config = {headers : {"Content-type" : "application/x-www-form-urlencoded"}}
                 let data = 'id_pilon='+ eliminar_id_pilon;
-                this.axios.post('http://127.0.0.1:8000/api/eliminarPilon',data,config).then((response) => {
+                this.axios.post(API_URL+'/eliminarPilon',data,config).then((response) => {
                     if(response.status=200){
                         this.text = 'Pilon Eliminado Exitosamente'
                         this.snackbar = true ;
@@ -299,7 +299,7 @@ export default {
                 });
                 let config = {headers : {"Content-type" : "application/x-www-form-urlencoded"}}
                 let data = 'id_admin_users='+ eliminar_id_admin_user;
-                this.axios.post('http://127.0.0.1:8000/api/eliminarAdmin',data,config).then((response) => {
+                this.axios.post(API_URL+'/eliminarAdmin',data,config).then((response) => {
                     if(response.status=200){
                         this.text = 'Administrador Eliminado Exitosamente'
                         this.snackbar = true ;
